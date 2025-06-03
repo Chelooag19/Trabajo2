@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Eliminar Recordatorio{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Eliminar Recordatorio</h1>
+<p>¿Estás seguro de que deseas eliminar <strong>"{{ reminder.content }}"</strong>?</p>
+
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+  <a href="{% url 'index' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

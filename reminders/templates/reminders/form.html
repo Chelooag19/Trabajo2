@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">{{ title }}</h1>
+
+<form method="post" class="needs-validation" novalidate>
+  {% csrf_token %}
+
+  <div class="mb-3">
+    {{ form.content.label_tag }}
+    {{ form.content|add_class:"form-control" }}
+    {% if form.content.errors %}
+      <div class="text-danger">{{ form.content.errors }}</div>
+    {% endif %}
+  </div>
+
+  <div class="form-check mb-3">
+    {{ form.important|add_class:"form-check-input" }}
+    <label class="form-check-label" for="{{ form.important.id_for_label }}">
+      {{ form.important.label }}
+    </label>
+  </div>
+
+  <button type="submit" class="btn btn-success">Guardar</button>
+  <a href="{% url 'index' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

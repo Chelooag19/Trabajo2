@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Recordatorios{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Lista de Recordatorios</h1>
+<a href="{% url 'create_reminder' %}" class="btn btn-primary mb-3">Crear nuevo recordatorio</a>
+
+<ul class="list-group">
+  {% for r in reminders %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <div>
+        <strong>{{ r.content }}</strong> - 
+        {% if r.important %}
+          <span class="badge bg-danger">Importante</span>
+        {% else %}
+          <span class="badge bg-secondary">Normal</span>
+        {% endif %}
+        <small class="text-muted ms-2">{{ r.createdAt|date:"d/m/Y H:i" }}</small>
+      </div>
+      <div>
+        <a href="{% url 'update_reminder' r.id %}" class="btn btn-sm btn-warning me-2">Editar</a>
+        <a href="{% url 'delete_reminder' r.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+      </div>
+    </li>
+  {% empty %}
+    <li class="list-group-item">No hay recordatorios.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
+
